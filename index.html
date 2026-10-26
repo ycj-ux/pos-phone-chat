@@ -4,6 +4,13 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#172b29">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="포스톡">
+  <link rel="manifest" href="./manifest.json">
+  <link rel="icon" type="image/png" sizes="192x192" href="./icon-192.png">
+  <link rel="apple-touch-icon" href="./icon-192.png">
   <title>포스톡</title>
   <style>
     :root{--ink:#18211f;--muted:#71807b;--line:#e6ece9;--paper:#fff;--canvas:#f3f6f4;--green:#347c68;--green-dark:#246653;--mint:#e6f4ee;--danger:#b84242;--shadow:0 20px 60px #24382f12}
@@ -40,6 +47,7 @@
         <div class="brand"><h1>포스톡</h1><div class="sub">포스 ↔ 휴대폰</div></div>
         <div class="status"><span id="statusDot" class="dot"></span><span id="statusText">연결 확인 중</span></div>
         <div class="top-actions">
+          <button id="installButton" class="logout hidden" type="button">앱 설치</button>
           <select id="deviceRole" class="role" aria-label="이 기기 이름"><option value="휴대폰">휴대폰</option><option value="포스">포스</option></select>
           <button id="logoutButton" class="logout" type="button">로그아웃</button>
         </div>
@@ -94,6 +102,27 @@
     let messagesQuery = null;
     let connectedRef = null;
     let cleanupBusy = false;
+    let deferredInstallPrompt = null;
+
+    window.addEventListener("beforeinstallprompt", (event) => {
+      event.preventDefault();
+      deferredInstallPrompt = event;
+      $("installButton").classList.remove("hidden");
+    });
+    $("installButton").addEventListener("click", async () => {
+      if (!deferredInstallPrompt) return;
+      deferredInstallPrompt.prompt();
+      await deferredInstallPrompt.userChoice;
+      deferredInstallPrompt = null;
+      $("installButton").classList.add("hidden");
+    });
+    window.addEventListener("appinstalled", () => {
+      deferredInstallPrompt = null;
+      $("installButton").classList.add("hidden");
+    });
+    if ("serviceWorker" in navigator && location.protocol === "https:") {
+      window.addEventListener("load", () => navigator.serviceWorker.register("./sw.js").catch(() => {}));
+    }
 
     roleSelect.value = localStorage.getItem("poschat-role") || "휴대폰";
     roleSelect.addEventListener("change", () => localStorage.setItem("poschat-role", roleSelect.value));
