@@ -15,12 +15,13 @@
   <style>
     :root{--ink:#18211f;--muted:#71807b;--line:#e6ece9;--paper:#fff;--canvas:#f3f6f4;--green:#347c68;--green-dark:#246653;--mint:#e6f4ee;--danger:#b84242;--shadow:0 20px 60px #24382f12}
     *{box-sizing:border-box}html,body{margin:0;min-height:100%;font-family:system-ui,-apple-system,"Malgun Gothic",sans-serif;color:var(--ink);background:var(--canvas)}button,input,textarea{font:inherit}button{cursor:pointer}
-    .shell{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px}.panel{width:min(100%,780px);height:min(860px,calc(100vh - 48px));min-height:520px;background:var(--paper);border:1px solid #e9eeeb;border-radius:24px;box-shadow:var(--shadow);display:flex;flex-direction:column;overflow:hidden}
+    .shell{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px}.panel{position:relative;width:min(100%,780px);height:min(860px,calc(100vh - 48px));min-height:520px;background:var(--paper);border:1px solid #e9eeeb;border-radius:24px;box-shadow:var(--shadow);display:flex;flex-direction:column;overflow:hidden}
     .top{display:flex;align-items:center;gap:14px;padding:19px 22px;border-bottom:1px solid var(--line);background:#fff}.mark{width:44px;height:44px;border-radius:15px;background:var(--green);color:#fff;display:grid;place-items:center;font-weight:800;font-size:20px;flex:none}.brand{min-width:0;flex:1}.brand h1{font-size:18px;margin:0 0 3px;letter-spacing:-.4px}.sub{font-size:12px;color:var(--muted)}.status{display:flex;align-items:center;gap:7px;font-size:12px;color:var(--muted);white-space:nowrap}.dot{width:8px;height:8px;border-radius:50%;background:#aab4b0}.dot.on{background:#3ba678;box-shadow:0 0 0 3px #3ba67820}.top-actions{display:flex;align-items:center;gap:8px}.role{border:1px solid var(--line);background:#fff;border-radius:10px;padding:8px 10px;color:var(--ink);font-size:12px}.logout{border:0;background:transparent;color:var(--muted);font-size:12px;padding:8px}
     .chat{flex:1;overflow-y:auto;padding:24px clamp(14px,4vw,34px);scroll-behavior:smooth;background:linear-gradient(#fff,#fbfcfb)}.welcome{max-width:430px;margin:30px auto;padding:24px;border:1px solid var(--line);border-radius:20px;background:#fff;text-align:center}.welcome-icon{font-size:26px;margin-bottom:8px}.welcome h2{font-size:16px;margin:0 0 6px}.welcome p{font-size:13px;color:var(--muted);line-height:1.6;margin:0}.day{display:flex;align-items:center;gap:12px;color:#9aa49f;font-size:11px;margin:10px 0 20px}.day:before,.day:after{content:"";height:1px;background:var(--line);flex:1}.row{display:flex;margin:10px 0;align-items:flex-end;gap:8px}.row.mine{justify-content:flex-end}.bubble-wrap{max-width:min(76%,470px)}.sender{font-size:11px;color:var(--muted);margin:0 0 5px 4px}.mine .sender{text-align:right;margin-right:4px}.bubble{background:#f0f3f1;border-radius:5px 17px 17px 17px;padding:11px 14px;line-height:1.5;font-size:14px;overflow-wrap:anywhere;white-space:pre-wrap}.mine .bubble{background:var(--mint);border-radius:17px 5px 17px 17px}.time{font-size:10px;color:#9aa49f;white-space:nowrap;padding-bottom:3px}.photo-bubble{padding:5px!important;background:#f0f3f1!important}.photo{display:block;max-width:min(100%,330px);max-height:360px;border-radius:13px;object-fit:contain;cursor:zoom-in;background:#e8eeea}.photo-loading{width:220px;height:120px;border-radius:12px;background:#e8eeea;display:grid;place-items:center;color:var(--muted);font-size:12px}.deleted{padding:10px 14px;color:var(--muted);font-size:12px;font-style:italic}
     .composer{border-top:1px solid var(--line);padding:14px 18px max(14px,env(safe-area-inset-bottom));background:#fff}.tools{display:flex;justify-content:space-between;align-items:center;margin-bottom:9px}.tools-note{font-size:11px;color:var(--muted)}.photo-btn{display:inline-flex;align-items:center;gap:7px;border:1px solid var(--line);border-radius:11px;background:#fff;padding:8px 11px;color:#53615c;font-size:12px}.photo-btn:hover{border-color:#b7d2c7;background:#f7fbf8}.compose-row{display:flex;align-items:flex-end;gap:9px}.message-input{flex:1;min-height:46px;max-height:130px;resize:vertical;padding:12px 14px;border:1px solid #dfe7e2;border-radius:14px;outline:none;background:#fafcfb;font-size:14px}.message-input:focus{border-color:#7eae9a;box-shadow:0 0 0 3px #347c6814}.send{width:46px;height:46px;border:0;border-radius:14px;color:#fff;background:var(--green);font-size:19px;display:grid;place-items:center}.send:hover{background:var(--green-dark)}.send:disabled,.photo-btn:disabled{opacity:.55;cursor:wait}.notice{min-height:16px;color:var(--muted);font-size:11px;margin:7px 3px 0}.notice.error{color:var(--danger)}.hidden{display:none!important}
     .login-shell{min-height:100vh;display:grid;place-items:center;padding:20px}.login-card{width:min(100%,390px);background:#fff;padding:30px;border-radius:24px;border:1px solid var(--line);box-shadow:var(--shadow)}.login-card .mark{margin-bottom:18px}.login-card h1{font-size:23px;margin:0 0 7px}.login-card p{color:var(--muted);font-size:13px;line-height:1.6;margin:0 0 22px}.field{display:block;margin:0 0 13px}.field span{font-size:12px;color:#64716c;display:block;margin:0 0 6px}.field input{width:100%;height:46px;padding:0 12px;border:1px solid #dfe7e2;border-radius:12px;outline:none}.field input:focus{border-color:#7eae9a}.login-submit{height:46px;width:100%;border:0;background:var(--green);color:white;border-radius:12px;font-weight:700;margin-top:3px}.login-error{min-height:18px;font-size:12px;color:var(--danger);margin-top:10px}.tiny{font-size:11px;color:#8b9691;text-align:center;margin-top:17px;line-height:1.5}
     .lightbox{position:fixed;inset:0;background:#101815e8;display:grid;place-items:center;padding:22px;z-index:10}.lightbox img{max-width:100%;max-height:100%;object-fit:contain}.lightbox button{position:absolute;top:14px;right:16px;border:0;border-radius:50%;width:42px;height:42px;background:#ffffff20;color:#fff;font-size:24px}
+    .drop-hint{position:absolute;inset:76px 12px 126px;z-index:5;display:grid;place-items:center;border:3px dashed #347c68;border-radius:20px;background:#f3fbf7ed;color:#246653;text-align:center;font-weight:700;font-size:18px;pointer-events:none}.drop-hint small{display:block;margin-top:8px;color:#53615c;font-size:13px;font-weight:500}
     @media(max-width:600px){.shell{padding:0}.panel{height:100dvh;min-height:0;border:0;border-radius:0}.top{padding:13px 14px;gap:10px}.mark{width:39px;height:39px;border-radius:13px}.brand h1{font-size:16px}.status{font-size:0;gap:0}.status .dot{width:9px;height:9px}.role{padding:7px 8px}.logout{padding:7px 3px}.chat{padding:18px 13px}.bubble-wrap{max-width:83%}.photo{max-width:min(100%,280px);max-height:300px}.composer{padding:11px 12px max(11px,env(safe-area-inset-bottom))}.tools-note{max-width:55%;text-align:right;line-height:1.35}.message-input{font-size:16px}}
   </style>
 </head>
@@ -55,6 +56,7 @@
       <section id="messageList" class="chat" aria-live="polite">
         <div id="emptyState" class="welcome"><div class="welcome-icon">💬</div><h2>대화를 시작해보세요</h2><p>이 계정으로 로그인한 포스와 휴대폰에만<br>메시지와 사진이 표시됩니다.</p></div>
       </section>
+      <div id="dropHint" class="drop-hint hidden" aria-hidden="true"><div>사진을 여기에 놓으세요<small>또는 채팅창에서 Ctrl+V</small></div></div>
       <footer class="composer">
         <div class="tools">
           <label class="photo-btn" for="photoInput">＋ 사진 보내기</label>
@@ -103,6 +105,7 @@
     let connectedRef = null;
     let cleanupBusy = false;
     let deferredInstallPrompt = null;
+    let photoUploadBusy = false;
 
     window.addEventListener("beforeinstallprompt", (event) => {
       event.preventDefault();
@@ -317,8 +320,18 @@
       const file = event.target.files && event.target.files[0];
       event.target.value = "";
       if (!file) return;
-      if (!file.type.startsWith("image/")) { setNotice("이미지 파일만 보낼 수 있습니다.", true); return; }
+      await uploadPhoto(file);
+    });
+
+    function isImageFile(file) {
+      return !!file && typeof file.type === "string" && file.type.startsWith("image/");
+    }
+
+    async function uploadPhoto(file) {
+      if (photoUploadBusy) { setNotice("사진을 전송 중입니다. 완료된 뒤 다시 보내주세요.", true); return; }
+      if (!isImageFile(file)) { setNotice("이미지 파일만 보낼 수 있습니다.", true); return; }
       if (file.size > 15 * 1024 * 1024) { setNotice("원본 사진이 너무 큽니다. 15MB 이하 사진을 선택해주세요.", true); return; }
+      photoUploadBusy = true;
       const button = document.querySelector(".photo-btn");
       button.setAttribute("aria-disabled", "true");
       setNotice("사진을 압축하고 전송 중…");
@@ -335,7 +348,57 @@
         await pruneOldData();
       } catch (error) {
         setNotice(error.message || "사진을 보내지 못했습니다. 다시 시도해주세요.", true);
-      } finally { button.removeAttribute("aria-disabled"); }
+      } finally { button.removeAttribute("aria-disabled"); photoUploadBusy = false; }
+    }
+
+    function carriesFiles(dataTransfer) {
+      if (!dataTransfer) return false;
+      const types = Array.from(dataTransfer.types || []);
+      return types.indexOf("Files") !== -1 || (dataTransfer.files && dataTransfer.files.length > 0);
+    }
+
+    const chatPanel = document.querySelector(".panel");
+    chatPanel.addEventListener("dragenter", (event) => {
+      if (chatView.classList.contains("hidden") || !carriesFiles(event.dataTransfer)) return;
+      event.preventDefault();
+      $("dropHint").classList.remove("hidden");
+    });
+    chatPanel.addEventListener("dragover", (event) => {
+      if (chatView.classList.contains("hidden") || !carriesFiles(event.dataTransfer)) return;
+      event.preventDefault();
+      if (event.dataTransfer) event.dataTransfer.dropEffect = "copy";
+      $("dropHint").classList.remove("hidden");
+    });
+    chatPanel.addEventListener("dragleave", (event) => {
+      if (event.relatedTarget && chatPanel.contains(event.relatedTarget)) return;
+      $("dropHint").classList.add("hidden");
+    });
+    chatPanel.addEventListener("drop", (event) => {
+      if (chatView.classList.contains("hidden") || !carriesFiles(event.dataTransfer)) return;
+      event.preventDefault();
+      $("dropHint").classList.add("hidden");
+      const files = Array.from(event.dataTransfer.files || []);
+      const file = files.find(isImageFile);
+      if (!file) { setNotice("이미지 파일만 보낼 수 있습니다.", true); return; }
+      if (files.filter(isImageFile).length > 1) setNotice("사진은 한 번에 한 장씩 전송합니다.");
+      uploadPhoto(file);
+    });
+
+    document.addEventListener("paste", (event) => {
+      if (chatView.classList.contains("hidden") || !auth.currentUser || !event.clipboardData) return;
+      let file = Array.from(event.clipboardData.files || []).find(isImageFile) || null;
+      if (!file && event.clipboardData.items) {
+        for (let i = 0; i < event.clipboardData.items.length; i++) {
+          const item = event.clipboardData.items[i];
+          if (item.kind === "file" && item.type && item.type.startsWith("image/")) {
+            file = item.getAsFile();
+            if (file) break;
+          }
+        }
+      }
+      if (!file) return;
+      event.preventDefault();
+      uploadPhoto(file);
     });
 
     async function compressImage(file) {
